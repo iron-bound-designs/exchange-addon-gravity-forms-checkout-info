@@ -20,7 +20,7 @@ Text Domain
 function it_exchange_register_gravity_forms_checkout_form() {
 	$options = array(
 	  'name'        => __( 'Gravity Forms Checkout Info', 'ibd_gravity_forms_checkout_info' ),
-	  'description' => __( 'Add a Gravity Form for customers to fill out during the checkout process', 'ibd_gravity_forms_checkout_info' ),
+	  'description' => __( 'Harness the full power of Gravity Forms during your checkout process.', 'ibd_gravity_forms_checkout_info' ),
 	  'author'      => 'Iron Bound Designs',
 	  'author_url'  => 'http://www.ironbounddesigns.com',
 	  'file'        => dirname( __FILE__ ) . '/init.php',

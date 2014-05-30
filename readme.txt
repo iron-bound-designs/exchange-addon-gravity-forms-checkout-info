@@ -8,11 +8,11 @@ Stable tag: 1.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-Add a Gravity Form for customers to fill out during the checkout process
+Harness the full power of Gravity Forms during your checkout process.
 
 == Description ==
 
-This plugin allows you to collect additional information from customers during the checkout process for each product using Gravity Forms.
+This plugin allows you to create a Gravity Form for your customers to fill out during the checkout process. Can be controlled on a per-product basis.
 
 Requires iThemes Exchange and Gravity Forms
 
