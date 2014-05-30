@@ -7,6 +7,7 @@ Version: 1.0
 Author: Iron Bound Designs
 Author URI: http://www.ironbounddesigns.com
 License: GPL2
+Text Domain
 */
 
 /**
@@ -33,6 +34,19 @@ function it_exchange_register_gravity_forms_checkout_form() {
 }
 
 add_action( 'it_exchange_register_addons', 'it_exchange_register_gravity_forms_checkout_form' );
+
+/**
+ * Loads the translation data for WordPress
+ *
+ * @uses load_plugin_textdomain()
+ * @since 1.0.3
+ * @return void
+ */
+function it_exchange_gfci_set_textdomain() {
+	load_plugin_textdomain( 'ibd_gravity_forms_checkout_info', false, dirname( plugin_basename( __FILE__ ) ) . '/lang/' );
+}
+
+add_action( 'plugins_loaded', 'it_exchange_gfci_set_textdomain' );
 
 class IBD_GFCI_Plugin {
 	/**
