@@ -1,6 +1,6 @@
 <?php
 /*
-Plugin Name: iThemes Exchange –Gravity Forms Checkout Info Add-on
+Plugin Name: iThemes Exchange – Gravity Forms Checkout Info Add-on
 Plugin URI: http://www.ironbounddesigns.com
 Description: Add a Gravity Form for customers to fill out during the checkout process
 Version: 1.0
