@@ -19,7 +19,7 @@ Text Domain
  */
 function it_exchange_register_gravity_forms_checkout_form() {
 	$options = array(
-	  'name'        => __( 'Gravity Forms Checkout Form', 'ibd_gravity_forms_checkout_info' ),
+	  'name'        => __( 'Gravity Forms Checkout Info', 'ibd_gravity_forms_checkout_info' ),
 	  'description' => __( 'Add a Gravity Form for customers to fill out during the checkout process', 'ibd_gravity_forms_checkout_info' ),
 	  'author'      => 'Iron Bound Designs',
 	  'author_url'  => 'http://www.ironbounddesigns.com',
@@ -57,7 +57,7 @@ function it_exchange_gfci_addon_show_deps_nag() {
 	if ( !ibd_gfci_deps_met() ) {
 		?>
 		<div id="it-exchange-add-on-deps-nag" class="it-exchange-nag">
-			<?php _e( 'You must have Gravity Forms active to use this plugin.', 'ibd_gravity_forms_checkout_info' ); ?>
+			<?php _e( 'You must have Gravity Forms active to use the Gravity Forms Checkout Info Exchange Add-on.', 'ibd_gravity_forms_checkout_info' ); ?>
 		</div>
 	<?php
 	}
