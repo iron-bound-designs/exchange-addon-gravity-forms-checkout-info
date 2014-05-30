@@ -30,7 +30,9 @@ function it_exchange_register_gravity_forms_checkout_form() {
 		'singular_name' => __( 'Gravity Forms Checkout Form', 'ibd_gravity_forms_checkout_info' ),
 	  )
 	);
-	it_exchange_register_addon( 'ibd-gravity-forms-info-product-feature', $options );
+
+	if ( ibd_gfci_deps_met() )
+		it_exchange_register_addon( 'ibd-gravity-forms-info-product-feature', $options );
 }
 
 add_action( 'it_exchange_register_addons', 'it_exchange_register_gravity_forms_checkout_form' );
@@ -48,6 +50,33 @@ function it_exchange_gfci_set_textdomain() {
 
 add_action( 'plugins_loaded', 'it_exchange_gfci_set_textdomain' );
 
+/**
+ *
+ */
+function it_exchange_gfci_addon_show_deps_nag() {
+	if ( !ibd_gfci_deps_met() ) {
+		?>
+		<div id="it-exchange-add-on-deps-nag" class="it-exchange-nag">
+			<?php _e( 'You must have Gravity Forms active to use this plugin.', 'ibd_gravity_forms_checkout_info' ); ?>
+		</div>
+	<?php
+	}
+}
+
+add_action( 'admin_notices', 'it_exchange_gfci_addon_show_deps_nag' );
+
+/**
+ * Determine if all of our deps are met
+ *
+ * @return bool
+ */
+function ibd_gfci_deps_met() {
+	return class_exists( 'GFForms' );
+}
+
+/**
+ * Class IBD_GFCI_Plugin
+ */
 class IBD_GFCI_Plugin {
 	/**
 	 *
