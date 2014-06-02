@@ -62,7 +62,7 @@ function ibd_gfci_add_hidden_field_to_gravity_form_during_checkout( $form_html, 
 	else
 		return $form_html;
 
-	if ( !it_exchange_product_supports_feature( $current_product_id, 'ibd-gravity-forms-info' ) )
+	if ( !it_exchange_product_has_feature( $current_product_id, 'ibd-gravity-forms-info' ) )
 		return $form_html;
 
 	$form_html .= "<input type='hidden' name='ibd_gravity_forms_info_product_id' value='$current_product_id'>";

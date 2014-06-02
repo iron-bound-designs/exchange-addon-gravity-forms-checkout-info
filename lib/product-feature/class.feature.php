@@ -25,7 +25,7 @@ class LDMW_Conference_Exchange_Feature extends IT_Exchange_Product_Feature_Abstr
 	 * @return void
 	 */
 	function print_metabox( $post ) {
-		$form_id = it_exchange_get_product_feature( $post->ID, $this->slug );
+		$form_id = it_exchange_get_product_feature( $post->ID, $this->slug, array( 'field' => 'form_id' ) );
 		?>
 		<p><?php echo $this->description; ?></p>
 
@@ -55,9 +55,13 @@ class LDMW_Conference_Exchange_Feature extends IT_Exchange_Product_Feature_Abstr
 		$form_id = $_POST['ibd_gravity_forms_info_form'];
 
 		if ( GFFormsModel::get_form( $form_id ) )
-			it_exchange_update_product_feature( $product_id, $this->slug, (int) $form_id );
+			$form_id = (int) $form_id;
 		else
-			it_exchange_update_product_feature( $product_id, $this->slug, false );
+			$form_id = false;
+
+		$data = array( 'form_id' => $form_id );
+
+		it_exchange_update_product_feature( $product_id, $this->slug, $data );
 	}
 
 	/**
@@ -87,7 +91,39 @@ class LDMW_Conference_Exchange_Feature extends IT_Exchange_Product_Feature_Abstr
 	 * @return string product feature
 	 */
 	function get_feature( $existing, $product_id, $options = array() ) {
-		return get_post_meta( $product_id, '_it_exchange_product_feature_' . $this->slug, true );
+
+		$raw_meta = get_post_meta( $product_id, '_it_exchange_product_feature_' . $this->slug, true );
+
+		$defaults = array(
+		  'form_id' => false
+		);
+
+		$raw_meta = wp_parse_args( $raw_meta, $defaults );
+
+		if ( !isset( $options['field'] ) ) // if we aren't looking for a particular field
+			return $raw_meta;
+
+		$field = $options['field'];
+
+		if ( isset( $raw_meta[$field] ) ) { // if the field exists with that name just return it
+			return $raw_meta[$field];
+		}
+		else if ( strpos( $field, "." ) !== false ) { // if the field name was passed using array dot notation
+			$pieces = explode( '.', $field );
+			$context = $raw_meta;
+			foreach ( $pieces as $piece ) {
+				if ( !is_array( $context ) || !array_key_exists( $piece, $context ) ) {
+					// error occurred
+					return null;
+				}
+				$context = & $context[$piece];
+			}
+
+			return $context;
+		}
+		else {
+			return null; // we didn't find the data specified
+		}
 	}
 
 	/**
@@ -105,7 +141,7 @@ class LDMW_Conference_Exchange_Feature extends IT_Exchange_Product_Feature_Abstr
 		if ( false === it_exchange_product_supports_feature( $product_id, $this->slug ) )
 			return false;
 
-		return (boolean) it_exchange_get_product_feature( $product_id, $this->slug );
+		return (boolean) it_exchange_get_product_feature( $product_id, $this->slug, array( 'field' => 'form_id' ) );
 	}
 
 	/**

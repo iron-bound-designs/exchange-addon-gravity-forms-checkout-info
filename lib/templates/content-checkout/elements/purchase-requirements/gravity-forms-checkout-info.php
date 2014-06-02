@@ -30,7 +30,7 @@ $session_data = it_exchange_get_session_data( 'ibd_gfci_checkout_forms' );
 			<?php if ( it_exchange_product_has_feature( $id, 'ibd-gravity-forms-info' ) && !isset( $session_data[$id] ) ) : ?>
 				<div class="it-exchange-gravity-forms-checkout-info-form">
 					<?php do_action( 'it_exchange_content_checkout_gravity_forms_checkout_info_purchase_requirement_before_form' ); ?>
-					<?php gravity_form( it_exchange_get_product_feature( $id, 'ibd-gravity-forms-info' ), $display_title = true, $display_description = true, $display_inactive = false, $field_values = null, $ajax = false ); ?>
+					<?php gravity_form( it_exchange_get_product_feature( $id, 'ibd-gravity-forms-info', array( 'field' => 'form_id' ) ), $display_title = true, $display_description = true, $display_inactive = false, $field_values = null, $ajax = false ); ?>
 					<?php do_action( 'it_exchange_content_checkout_gravity_forms_checkout_info_purchase_requirement_after_form' ); ?>
 				</div>
 			<?php endif; ?>

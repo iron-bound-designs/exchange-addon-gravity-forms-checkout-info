@@ -79,7 +79,7 @@ function gformInitSpinner( formId, spinnerUrl ) {
 
 	<div class="it-exchange-gravity-forms-checkout-info-form">
 		<?php do_action( 'it_exchange_super_widget_gravity_forms_checkout_info_purchase_requirement_before_form' ); ?>
-		<?php gravity_form( it_exchange_get_product_feature( $id, 'ibd-gravity-forms-info' ), $display_title = true, $display_description = true, $display_inactive = false, $field_values = null, $ajax = true ); ?>
+		<?php gravity_form( it_exchange_get_product_feature( $id, 'ibd-gravity-forms-info', array( 'field' => 'form_id' ) ), $display_title = true, $display_description = true, $display_inactive = false, $field_values = null, $ajax = true ); ?>
 		<?php do_action( 'it_exchange_super_widget_gravity_forms_checkout_info_purchase_requirement_after_form' ); ?>
 	</div>
 
