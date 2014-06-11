@@ -59,7 +59,7 @@ function ibd_gfci_force_sw_valid_states_on_multi_item_cart( $valid_states ) {
 	return $valid_states;
 }
 
-add_filter( 'it_exchange_super_widget_valid_states', array( $this, 'ibd_gfci_force_sw_valid_states_on_multi_item_cart' ) );
+add_filter( 'it_exchange_super_widget_valid_states', 'ibd_gfci_force_sw_valid_states_on_multi_item_cart' );
 
 /**
  * Add a hidden field to the gravity form
