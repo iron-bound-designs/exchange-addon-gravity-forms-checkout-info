@@ -17,7 +17,7 @@ function ibd_gfci_register_purchase_requirement() {
 	  'checkout-template-part' => 'gravity-forms-checkout-info',
 	  'notification'           => 'We need some more information from you before you can checkout',
 	);
-	it_exchange_register_purchase_requirement( 'gravity-forms-info', $properties );
+	it_exchange_register_purchase_requirement( 'gravity-forms-checkout-info', $properties );
 }
 
 add_action( 'init', 'ibd_gfci_register_purchase_requirement' );
@@ -43,6 +43,23 @@ function ibd_gfci_all_checkout_gravity_forms_submitted() {
 
 	return true;
 }
+
+/**
+ * Force the gravity forms checkout info as a valid SW state
+ * during non multi item cart because the purchase requirements seem to get wiped.
+ *
+ * @param $valid_states array
+ *
+ * @return array
+ */
+function ibd_gfci_force_sw_valid_states_on_multi_item_cart( $valid_states ) {
+	if ( ! it_exchange_is_multi_item_cart_allowed() )
+		$valid_states[] = 'gravity-forms-checkout-info';
+
+	return $valid_states;
+}
+
+add_filter( 'it_exchange_super_widget_valid_states', array( $this, 'ibd_gfci_force_sw_valid_states_on_multi_item_cart' ) );
 
 /**
  * Add a hidden field to the gravity form
