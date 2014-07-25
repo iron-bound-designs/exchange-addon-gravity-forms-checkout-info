@@ -3,8 +3,8 @@ Contributors: TimothyBlynJacobs
 Donate link: http://ironbounddesigns.com/
 Tags: iThemes Exchange, addon, ecommerce, gravity forms, checkout
 Requires at least: 3.9
-Tested up to: 3.9.1
-Stable tag: 1.1
+Tested up to: 4.0
+Stable tag: 1.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -25,6 +25,10 @@ Requires iThemes Exchange and Gravity Forms
 4. Activate the plugin through the 'Plugins' menu in WordPress Administration.
 
 == Changelog ==
+
+= 1.2 =
+* ADD: Title of Gravity Form in the admin payments screen area
+* FIX: Occasionally user would have to submit Gravity Forms multiple times on the checkout page
 
 = 1.1 =
 * FIX: Gravity Form wouldn't appear when multi-item cart was not enabled
