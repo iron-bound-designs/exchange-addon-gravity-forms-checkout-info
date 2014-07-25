@@ -160,10 +160,10 @@ function ibd_gfci_display_gravity_forms_submission_data_on_transaction_admin( $p
 	$lead_id = $transaction_product['ibd_gfci_entry_id'];
 	$lead = RGFormsModel::get_lead( $lead_id );
 	$form_id = $lead['form_id'];
+	$form = RGFormsModel::get_form($form_id);
 
 	$url = "admin.php?page=gf_entries&view=entry&id=$form_id&lid=$lead_id";
-
-	echo "<h4><a href='{$url}'>" . __( 'View Gravity Form Checkout Info', IBD_GFCI_Plugin::SLUG ) . "</a></h4>";
+	echo "<h4><a href='{$url}'>" . sprintf( __( 'View Gravity Form Checkout Info: %s', IBD_GFCI_Plugin::SLUG ), $form->title ) . "</a></h4>";
 }
 
 add_action( 'it_exchange_transaction_details_end_product_details', 'ibd_gfci_display_gravity_forms_submission_data_on_transaction_admin', 10, 2 );
