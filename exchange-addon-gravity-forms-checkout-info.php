@@ -3,11 +3,11 @@
 Plugin Name: iThemes Exchange – Gravity Forms Checkout Info Add-on
 Plugin URI: http://www.ironbounddesigns.com
 Description: Add a Gravity Form for customers to fill out during the checkout process
-Version: 1.1
+Version: 1.2
 Author: Iron Bound Designs
 Author URI: http://www.ironbounddesigns.com
 License: GPL2
-Text Domain
+Domain: ibd_gravity_forms_checkout_info
 */
 
 /**
