@@ -106,7 +106,7 @@ function ibd_gfci_process_purchase_requirement_gravity_form_submission( $lead, $
 
 	$forms[$_POST['ibd_gravity_forms_info_product_id']] = $lead['id'];
 
-	it_exchange_add_session_data( 'ibd_gfci_checkout_forms', $forms );
+	it_exchange_update_session_data( 'ibd_gfci_checkout_forms', $forms );
 }
 
 add_action( 'gform_after_submission', 'ibd_gfci_process_purchase_requirement_gravity_form_submission', 10, 2 );
