@@ -20,6 +20,14 @@ if ( in_array( 'logged-in', it_exchange_get_pending_purchase_requirements() ) )
 $session_data = it_exchange_get_session_data( 'ibd_gfci_checkout_forms' );
 $id = $GLOBALS['it_exchange']['product']->ID;
 
+if (empty($id)) {
+	?>
+	<script>
+		location.reload();
+	</script>
+	<?php
+}
+
 if ( !it_exchange_product_has_feature( $id, 'ibd-gravity-forms-info' ) || isset( $session_data[$id] ) )
 	return;
 
