@@ -72,17 +72,25 @@ add_filter( 'it_exchange_super_widget_valid_states', 'ibd_gfci_force_sw_valid_st
  * @return string
  */
 function ibd_gfci_add_hidden_field_to_gravity_form_during_checkout( $form_html, $form ) {
-	if ( isset( $GLOBALS['it_exchange']['cart-item']['product_id'] ) )
-		$current_product_id = $GLOBALS['it_exchange']['cart-item']['product_id'];
-	elseif ( isset( $GLOBALS['it_exchange']['product'] ) )
-		$current_product_id = $GLOBALS['it_exchange']['product']->ID;
-	else
-		return $form_html;
 
-	if ( !it_exchange_product_has_feature( $current_product_id, 'ibd-gravity-forms-info' ) )
-		return $form_html;
+	$form_id = $form['id'];
+	$products = it_exchange_get_cart_products();
+	$product_id = null;
 
-	$form_html .= "<input type='hidden' name='ibd_gravity_forms_info_product_id' value='$current_product_id'>";
+	foreach ( $products as $product ) {
+		if ( $form_id == it_exchange_get_product_feature( $product['product_id'], 'ibd-gravity-forms-info',
+				array( 'field' => 'form_id' ) ) ) {
+
+			$product_id = $product['product_id'];
+			break;
+		}
+	}
+
+	if ( ! isset( $product_id ) ) {
+		return $form_html;
+	}
+
+	$form_html .= "<input type='hidden' name='ibd_gravity_forms_info_product_id' value='$product_id'>";
 
 	return $form_html;
 }
@@ -193,14 +201,7 @@ function it_exchange_ibd_gfci_enqueue_gravity_forms_scripts_on_checkout() {
 
 	$form_ids = array();
 
-	if ( it_exchange_is_page( 'product' ) ) {
-		if ( it_exchange_product_has_feature( $GLOBALS['post']->ID, 'ibd-gravity-forms-info' ) ) {
-			wp_enqueue_script( 'gform_gravityforms' );
-
-			$form_ids[] = it_exchange_get_product_feature( $GLOBALS['post']->ID, 'ibd-gravity-forms-info', array( 'field' => 'form_id' ) );
-		}
-
-	} else if ( it_exchange_is_page( 'checkout' ) ) {
+	if ( it_exchange_in_superwidget() || it_exchange_is_page( 'checkout' ) ) {
 		$products = it_exchange_get_cart_products();
 
 		// loop through products, and if a product has the feature, then enqueue the scripts
@@ -209,21 +210,27 @@ function it_exchange_ibd_gfci_enqueue_gravity_forms_scripts_on_checkout() {
 				$form_ids[] = it_exchange_get_product_feature( $product['product_id'], 'ibd-gravity-forms-info', array( 'field' => 'form_id' ) ) ;
 			}
 		}
-
-		wp_enqueue_script( 'gform_gravityforms' );
+	} else {
+		return;
 	}
 
 	require_once( GFCommon::get_base_path() . "/form_display.php" );
 
 	foreach ( $form_ids as $form_id ) {
-		$form = GFFormsModel::get_form_meta($form_id);
+		$form = GFFormsModel::get_form_meta( $form_id );
 
-		if ( GFFormDisplay::has_conditional_logic( $form ) ) {
-			wp_enqueue_script( 'gform_conditional_logic' );
+		if ( it_exchange_in_superwidget() ) {
+			GFFormDisplay::print_form_scripts( $form, true );
 
-			return;
+			wp_enqueue_script( 'gform_gravityforms' );
+			wp_print_scripts( array( 'gform_gravityforms' ) );
+		} else {
+			GFFormDisplay::enqueue_form_scripts( $form, true );
+
+			wp_enqueue_script( 'gform_gravityforms' );
 		}
 	}
 }
 
 add_action( 'wp_enqueue_scripts', 'it_exchange_ibd_gfci_enqueue_gravity_forms_scripts_on_checkout' );
+add_action( 'it_exchange_super_widget_ajax_top', 'it_exchange_ibd_gfci_enqueue_gravity_forms_scripts_on_checkout' );
