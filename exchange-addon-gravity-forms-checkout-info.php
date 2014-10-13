@@ -24,6 +24,7 @@ function it_exchange_register_gravity_forms_checkout_form() {
 	  'author'      => 'Iron Bound Designs',
 	  'author_url'  => 'http://www.ironbounddesigns.com',
 	  'file'        => dirname( __FILE__ ) . '/init.php',
+	  'icon'        => IBD_GFCI_Plugin::$url . '/assets/icon-50x50.png',
 	  'category'    => 'product-feature',
 	  'basename'    => plugin_basename( __FILE__ ),
 	  'labels'      => array(
