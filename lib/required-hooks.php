@@ -182,3 +182,35 @@ function it_exchange_ibd_gfci_addon_add_template_paths( $paths = array() ) {
 }
 
 add_filter( 'it_exchange_possible_template_paths', 'it_exchange_ibd_gfci_addon_add_template_paths' );
+
+/**
+ * Enqueue Gravity Forms JS on checkout pages
+ * with a Gravity Form Checkout Info product.
+ *
+ * @since 1.3
+ */
+function it_exchange_ibd_gfci_enqueue_gravity_forms_scripts_on_checkout() {
+
+	if ( it_exchange_is_page( 'product' ) ) {
+		if ( it_exchange_product_has_feature( $GLOBALS['post']->ID, 'ibd-gravity-forms-info' ) ) {
+			wp_enqueue_script( 'gform_conditional_logic' );
+			wp_enqueue_script( 'gform_gravityforms' );
+		}
+
+	} else if ( it_exchange_is_page( 'checkout' ) ) {
+		$products = it_exchange_get_cart_products();
+
+		// loop through products, and if a product has the feature, then enqueue the scripts
+		foreach ( $products as $product ) {
+			if ( it_exchange_product_has_feature( $product['product_id'], 'ibd-gravity-forms-info' ) ) {
+				wp_enqueue_script( 'gform_conditional_logic' );
+				wp_enqueue_script( 'gform_gravityforms' );
+
+				return;
+			}
+
+		}
+	}
+}
+
+add_action( 'wp_enqueue_scripts', 'it_exchange_ibd_gfci_enqueue_gravity_forms_scripts_on_checkout' );
