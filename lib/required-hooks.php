@@ -72,17 +72,25 @@ add_filter( 'it_exchange_super_widget_valid_states', 'ibd_gfci_force_sw_valid_st
  * @return string
  */
 function ibd_gfci_add_hidden_field_to_gravity_form_during_checkout( $form_html, $form ) {
-	if ( isset( $GLOBALS['it_exchange']['cart-item']['product_id'] ) )
-		$current_product_id = $GLOBALS['it_exchange']['cart-item']['product_id'];
-	elseif ( isset( $GLOBALS['it_exchange']['product'] ) )
-		$current_product_id = $GLOBALS['it_exchange']['product']->ID;
-	else
-		return $form_html;
 
-	if ( !it_exchange_product_has_feature( $current_product_id, 'ibd-gravity-forms-info' ) )
-		return $form_html;
+	$form_id = $form['id'];
+	$products = it_exchange_get_cart_products();
+	$product_id = null;
 
-	$form_html .= "<input type='hidden' name='ibd_gravity_forms_info_product_id' value='$current_product_id'>";
+	foreach ( $products as $product ) {
+		if ( $form_id == it_exchange_get_product_feature( $product['product_id'], 'ibd-gravity-forms-info',
+				array( 'field' => 'form_id' ) ) ) {
+
+			$product_id = $product['product_id'];
+			break;
+		}
+	}
+
+	if ( ! isset( $product_id ) ) {
+		return $form_html;
+	}
+
+	$form_html .= "<input type='hidden' name='ibd_gravity_forms_info_product_id' value='$product_id'>";
 
 	return $form_html;
 }
