@@ -4,7 +4,7 @@ Donate link: http://ironbounddesigns.com/
 Tags: iThemes Exchange, addon, ecommerce, gravity forms, checkout
 Requires at least: 3.9
 Tested up to: 4.0
-Stable tag: 1.2
+Stable tag: 1.3
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -14,7 +14,7 @@ Harness the full power of Gravity Forms during your checkout process.
 
 This plugin allows you to create a Gravity Form for your customers to fill out during the checkout process. Can be controlled on a per-product basis.
 
-Requires iThemes Exchange and Gravity Forms
+Requires iThemes Exchange and Gravity Forms.
 
 
 == Installation ==
@@ -25,6 +25,11 @@ Requires iThemes Exchange and Gravity Forms
 4. Activate the plugin through the 'Plugins' menu in WordPress Administration.
 
 == Changelog ==
+
+= 1.3 =
+* FIX: Ensure Gravity Forms load after a user has just registered
+* FIX: Allow for Gravity Forms that require JS
+* FIX: Allow for required fields
 
 = 1.2 =
 * ADD: Title of Gravity Form in the admin payments screen area
