@@ -193,14 +193,7 @@ function it_exchange_ibd_gfci_enqueue_gravity_forms_scripts_on_checkout() {
 
 	$form_ids = array();
 
-	if ( it_exchange_is_page( 'product' ) ) {
-		if ( it_exchange_product_has_feature( $GLOBALS['post']->ID, 'ibd-gravity-forms-info' ) ) {
-			wp_enqueue_script( 'gform_gravityforms' );
-
-			$form_ids[] = it_exchange_get_product_feature( $GLOBALS['post']->ID, 'ibd-gravity-forms-info', array( 'field' => 'form_id' ) );
-		}
-
-	} else if ( it_exchange_is_page( 'checkout' ) ) {
+	if ( it_exchange_in_superwidget() || it_exchange_is_page( 'checkout' ) ) {
 		$products = it_exchange_get_cart_products();
 
 		// loop through products, and if a product has the feature, then enqueue the scripts
@@ -209,21 +202,27 @@ function it_exchange_ibd_gfci_enqueue_gravity_forms_scripts_on_checkout() {
 				$form_ids[] = it_exchange_get_product_feature( $product['product_id'], 'ibd-gravity-forms-info', array( 'field' => 'form_id' ) ) ;
 			}
 		}
-
-		wp_enqueue_script( 'gform_gravityforms' );
+	} else {
+		return;
 	}
 
 	require_once( GFCommon::get_base_path() . "/form_display.php" );
 
 	foreach ( $form_ids as $form_id ) {
-		$form = GFFormsModel::get_form_meta($form_id);
+		$form = GFFormsModel::get_form_meta( $form_id );
 
-		if ( GFFormDisplay::has_conditional_logic( $form ) ) {
-			wp_enqueue_script( 'gform_conditional_logic' );
+		if ( it_exchange_in_superwidget() ) {
+			GFFormDisplay::print_form_scripts( $form, true );
 
-			return;
+			wp_enqueue_script( 'gform_gravityforms' );
+			wp_print_scripts( array( 'gform_gravityforms' ) );
+		} else {
+			GFFormDisplay::enqueue_form_scripts( $form, true );
+
+			wp_enqueue_script( 'gform_gravityforms' );
 		}
 	}
 }
 
 add_action( 'wp_enqueue_scripts', 'it_exchange_ibd_gfci_enqueue_gravity_forms_scripts_on_checkout' );
+add_action( 'it_exchange_super_widget_ajax_top', 'it_exchange_ibd_gfci_enqueue_gravity_forms_scripts_on_checkout' );
