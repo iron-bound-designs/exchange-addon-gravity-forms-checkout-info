@@ -1,4 +1,4 @@
-=== Gravity Forms Checkout Info Add-on for iThemes Exchange ===
+=== Gravity Forms Checkout Info: IT Exchange ===
 Contributors: TimothyBlynJacobs
 Donate link: http://ironbounddesigns.com/
 Tags: iThemes Exchange, addon, ecommerce, gravity forms, checkout
