@@ -13,12 +13,8 @@
  * at your templates root.
  */
 
-// Don't show anything if login-requirement exists and hasn't been met
-if ( in_array( 'logged-in', it_exchange_get_pending_purchase_requirements() ) )
-	return;
-
-$session_data = it_exchange_get_session_data( 'ibd_gfci_checkout_forms' );
-$id = $GLOBALS['it_exchange']['product']->ID;
+$id = array_pop( it_exchange_get_cart_products() );
+$id = $id['product_id'];
 
 if ( !it_exchange_product_has_feature( $id, 'ibd-gravity-forms-info' ) || isset( $session_data[$id] ) )
 	return;
