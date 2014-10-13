@@ -14,10 +14,6 @@
  * located in your theme.
  */
 
-// Don't show anything if login-requirement exists and hasn't been met
-if ( in_array( 'logged-in', it_exchange_get_pending_purchase_requirements() ) )
-	return;
-
 $session_data = it_exchange_get_session_data( 'ibd_gfci_checkout_forms' );
 
 ?>
