@@ -16,6 +16,14 @@
 $id = array_pop( it_exchange_get_cart_products() );
 $id = $id['product_id'];
 
+if (empty($id)) {
+	?>
+	<script>
+		location.reload();
+	</script>
+	<?php
+}
+
 if ( !it_exchange_product_has_feature( $id, 'ibd-gravity-forms-info' ) || isset( $session_data[$id] ) )
 	return;
 
