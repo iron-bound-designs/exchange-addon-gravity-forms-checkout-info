@@ -23,6 +23,17 @@ function ibd_gfci_register_purchase_requirement() {
 add_action( 'init', 'ibd_gfci_register_purchase_requirement' );
 
 /**
+ * Register Gravity Forms Scripts
+ */
+function ibd_gfci_register_scripts() {
+  if (it_exchange_is_page()) {
+    wp_enqueue_script( 'gform_conditional_logic' );
+    wp_enqueue_script( 'gform_gravityforms' );
+  }
+}
+add_action('wp_enqueue_scripts', 'ibd_gfci_register_scripts', 100);
+
+/**
  * Determine if all of the checkout gravity forms have been submitted
  *
  * @return bool
