@@ -160,6 +160,9 @@ add_filter( 'it_exchange_transaction_object', 'ibd_gfci_clear_gravity_form_sessi
 
 /**
  * Display the gravity forms submission data in the transaction admin panel
+ *
+ * @param WP_Post $post
+ * @param $transaction_product array
  */
 function ibd_gfci_display_gravity_forms_submission_data_on_transaction_admin( $post, $transaction_product ) {
 	if ( !isset( $transaction_product['ibd_gfci_entry_id'] ) )
