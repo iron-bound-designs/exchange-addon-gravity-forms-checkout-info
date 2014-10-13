@@ -191,10 +191,13 @@ add_filter( 'it_exchange_possible_template_paths', 'it_exchange_ibd_gfci_addon_a
  */
 function it_exchange_ibd_gfci_enqueue_gravity_forms_scripts_on_checkout() {
 
+	$form_ids = array();
+
 	if ( it_exchange_is_page( 'product' ) ) {
 		if ( it_exchange_product_has_feature( $GLOBALS['post']->ID, 'ibd-gravity-forms-info' ) ) {
-			wp_enqueue_script( 'gform_conditional_logic' );
 			wp_enqueue_script( 'gform_gravityforms' );
+
+			$form_ids[] = it_exchange_get_product_feature( $GLOBALS['post']->ID, 'ibd-gravity-forms-info', array( 'field' => 'form_id' ) );
 		}
 
 	} else if ( it_exchange_is_page( 'checkout' ) ) {
@@ -203,12 +206,22 @@ function it_exchange_ibd_gfci_enqueue_gravity_forms_scripts_on_checkout() {
 		// loop through products, and if a product has the feature, then enqueue the scripts
 		foreach ( $products as $product ) {
 			if ( it_exchange_product_has_feature( $product['product_id'], 'ibd-gravity-forms-info' ) ) {
-				wp_enqueue_script( 'gform_conditional_logic' );
-				wp_enqueue_script( 'gform_gravityforms' );
-
-				return;
+				$form_ids[] = it_exchange_get_product_feature( $product['product_id'], 'ibd-gravity-forms-info', array( 'field' => 'form_id' ) ) ;
 			}
+		}
 
+		wp_enqueue_script( 'gform_gravityforms' );
+	}
+
+	require_once( GFCommon::get_base_path() . "/form_display.php" );
+
+	foreach ( $form_ids as $form_id ) {
+		$form = GFFormsModel::get_form_meta($form_id);
+
+		if ( GFFormDisplay::has_conditional_logic( $form ) ) {
+			wp_enqueue_script( 'gform_conditional_logic' );
+
+			return;
 		}
 	}
 }
