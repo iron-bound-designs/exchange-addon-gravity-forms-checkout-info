@@ -37,20 +37,6 @@ jQuery( document ).bind( 'gform_confirmation_loaded', function ( event, form_id 
 	itExchangeGetSuperWidgetState( 'checkout' );
 } );
 
-function gformInitSpinner( formId, spinnerUrl ) {
-
-	if ( typeof spinnerUrl == 'undefined' || !spinnerUrl )
-		spinnerUrl = gform.applyFilters( "gform_spinner_url", gf_global.spinnerUrl, formId );
-
-	jQuery( '#gform_' + formId ).submit( function () {
-		if ( jQuery( '#gform_ajax_spinner_'.formId ).length == 0 ) {
-			jQuery( '#gform_submit_button_' + formId + ', #gform_wrapper_' + formId + ' .gform_next_button, #gform_wrapper_' + formId + ' .gform_image_button' )
-			  .after( '<img id="gform_ajax_spinner_' + formId + '"  class="gform_ajax_spinner" src="' + spinnerUrl + '" alt="" />' );
-		}
-	} );
-
-}
-
 </script>
 
 <style>
