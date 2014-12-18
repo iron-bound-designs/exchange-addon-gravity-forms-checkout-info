@@ -217,20 +217,24 @@ function it_exchange_ibd_gfci_enqueue_gravity_forms_scripts_on_checkout() {
 		return;
 	}
 
-	require_once( GFCommon::get_base_path() . "/form_display.php" );
+	$req = it_exchange_get_next_purchase_requirement();
 
-	foreach ( $form_ids as $form_id ) {
-		$form = GFFormsModel::get_form_meta( $form_id );
+	if ( $req && $req['slug'] == 'gravity-forms-checkout-info' ) {
+		require_once( GFCommon::get_base_path() . "/form_display.php" );
 
-		if ( it_exchange_in_superwidget() ) {
-			GFFormDisplay::print_form_scripts( $form, true );
+		foreach ( $form_ids as $form_id ) {
+			$form = GFFormsModel::get_form_meta( $form_id );
 
-			wp_enqueue_script( 'gform_gravityforms' );
-			wp_print_scripts( array( 'gform_gravityforms' ) );
-		} else {
-			GFFormDisplay::enqueue_form_scripts( $form, true );
+			if ( it_exchange_in_superwidget() ) {
+				GFFormDisplay::print_form_scripts( $form, true );
 
-			wp_enqueue_script( 'gform_gravityforms' );
+				wp_enqueue_script( 'gform_gravityforms' );
+				wp_print_scripts( array( 'gform_gravityforms' ) );
+			} else {
+				GFFormDisplay::enqueue_form_scripts( $form, true );
+
+				wp_enqueue_script( 'gform_gravityforms' );
+			}
 		}
 	}
 }
