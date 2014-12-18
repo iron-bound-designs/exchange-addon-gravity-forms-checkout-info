@@ -3,8 +3,8 @@ Contributors: TimothyBlynJacobs
 Donate link: http://ironbounddesigns.com/
 Tags: iThemes Exchange, addon, ecommerce, gravity forms, checkout
 Requires at least: 3.9
-Tested up to: 4.0
-Stable tag: 1.4
+Tested up to: 4.1
+Stable tag: 1.5
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -25,6 +25,9 @@ Requires iThemes Exchange and Gravity Forms.
 4. Activate the plugin through the 'Plugins' menu in WordPress Administration.
 
 == Changelog ==
+
+= 1.5 =
+* ADD: Allow for appending the form values to admin confirmation emails
 
 = 1.4 =
 * FIX: Only load Gravity Forms JS when displaying a Form in the Super Widget
