@@ -13,7 +13,8 @@
  * at your templates root.
  */
 
-$id = array_pop( it_exchange_get_cart_products() );
+$products = it_exchange_get_cart_products();
+$id = array_pop( $products );
 $id = $id['product_id'];
 
 if ( !it_exchange_product_has_feature( $id, 'ibd-gravity-forms-info' ) || isset( $session_data[$id] ) )

@@ -241,3 +241,44 @@ function it_exchange_ibd_gfci_enqueue_gravity_forms_scripts_on_checkout() {
 
 add_action( 'wp_enqueue_scripts', 'it_exchange_ibd_gfci_enqueue_gravity_forms_scripts_on_checkout' );
 add_action( 'it_exchange_super_widget_ajax_top', 'it_exchange_ibd_gfci_enqueue_gravity_forms_scripts_on_checkout' );
+
+/**
+ * Append the Gravity Forms fields to the admin store confirmation email.
+ *
+ * @since 1.5
+ *
+ * @param string $content
+ * @param IT_Exchange_Transaction $transaction
+ *
+ * @return string
+ */
+function it_exchange_ibd_gfci_append_fields_to_admin_email( $content, $transaction ) {
+
+	$options = it_exchange_get_option( 'addon_ibd_gfci' );
+
+	if ( isset( $options['add-fields-to-admin-email'] ) && $options['add-fields-to-admin-email'] ) {
+
+		$content .= "<h3>" . __( "Gravity Forms Checkout Info", IBD_GFCI_Plugin::SLUG ) . "</h3>";
+
+		foreach ( $transaction->get_products() as $product ) {
+			if ( it_exchange_product_has_feature( $product['product_id'], 'ibd-gravity-forms-info' ) ) {
+
+				$lead_id = $product['ibd_gfci_entry_id'];
+				$lead = RGFormsModel::get_lead( $lead_id );
+
+				$form_id = $lead['form_id'];
+				$form = RGFormsModel::get_form_meta( $form_id );
+
+				$title = $product['product_name'] . " – " . $form['title'];
+				$gf_content = GFCommon::replace_variables( '{all_fields}', (array) $form, $lead );
+
+				$content .= "<h4>$title</h4>";
+				$content .= $gf_content;
+			}
+		}
+	}
+
+	return $content;
+}
+
+add_filter( 'send_admin_emails_body', 'it_exchange_ibd_gfci_append_fields_to_admin_email', 10, 2 );

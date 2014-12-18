@@ -19,15 +19,16 @@ Domain: ibd_gravity_forms_checkout_info
  */
 function it_exchange_register_gravity_forms_checkout_form() {
 	$options = array(
-	  'name'        => __( 'Gravity Forms Checkout Info', 'ibd_gravity_forms_checkout_info' ),
-	  'description' => __( 'Harness the full power of Gravity Forms during your checkout process.', 'ibd_gravity_forms_checkout_info' ),
-	  'author'      => 'Iron Bound Designs',
-	  'author_url'  => 'http://www.ironbounddesigns.com',
-	  'file'        => dirname( __FILE__ ) . '/init.php',
-	  'icon'        => IBD_GFCI_Plugin::$url . '/assets/icon-50x50.png',
-	  'category'    => 'product-feature',
-	  'basename'    => plugin_basename( __FILE__ ),
-	  'labels'      => array(
+	  'name'                => __( 'Gravity Forms Checkout Info', 'ibd_gravity_forms_checkout_info' ),
+	  'description'         => __( 'Harness the full power of Gravity Forms during your checkout process.', 'ibd_gravity_forms_checkout_info' ),
+	  'author'              => 'Iron Bound Designs',
+	  'author_url'          => 'http://www.ironbounddesigns.com',
+	  'file'                => dirname( __FILE__ ) . '/init.php',
+	  'icon'                => IBD_GFCI_Plugin::$url . '/assets/icon-50x50.png',
+	  'category'            => 'product-feature',
+	  'settings-callback'   => 'it_exchange_gfci_addon_settings',
+	  'basename'            => plugin_basename( __FILE__ ),
+	  'labels'              => array(
 		'singular_name' => __( 'Gravity Forms Checkout Form', 'ibd_gravity_forms_checkout_info' ),
 	  )
 	);
