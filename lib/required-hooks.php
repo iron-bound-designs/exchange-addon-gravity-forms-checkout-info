@@ -226,7 +226,10 @@ function it_exchange_ibd_gfci_enqueue_gravity_forms_scripts_on_checkout() {
 			$form = GFFormsModel::get_form_meta( $form_id );
 
 			if ( it_exchange_in_superwidget() ) {
+
+				add_action( 'wp_print_scripts', 'it_exchange_ibd_gfci_dequeue_jquery_from_gf' );
 				GFFormDisplay::print_form_scripts( $form, true );
+				remove_action( 'wp_print_scripts', 'it_exchange_ibd_gfci_dequeue_jquery_from_gf' );
 
 				wp_enqueue_script( 'gform_gravityforms' );
 				wp_print_scripts( array( 'gform_gravityforms' ) );
@@ -234,6 +237,8 @@ function it_exchange_ibd_gfci_enqueue_gravity_forms_scripts_on_checkout() {
 				GFFormDisplay::enqueue_form_scripts( $form, true );
 
 				wp_enqueue_script( 'gform_gravityforms' );
+				wp_dequeue_script( 'jquery' );
+				wp_dequeue_script( 'jquery-migrate') ;
 			}
 		}
 	}
@@ -241,6 +246,15 @@ function it_exchange_ibd_gfci_enqueue_gravity_forms_scripts_on_checkout() {
 
 add_action( 'wp_enqueue_scripts', 'it_exchange_ibd_gfci_enqueue_gravity_forms_scripts_on_checkout' );
 add_action( 'it_exchange_super_widget_ajax_top', 'it_exchange_ibd_gfci_enqueue_gravity_forms_scripts_on_checkout' );
+
+/**
+ * Dequeue jQuery from GF's print scripts process.
+ *
+ * @since 1.6
+ */
+function it_exchange_ibd_gfci_dequeue_jquery_from_gf() {
+	wp_scripts()->dequeue( 'jquery' );
+}
 
 /**
  * Append the Gravity Forms fields to the admin store confirmation email.
