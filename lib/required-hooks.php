@@ -159,6 +159,35 @@ function ibd_gfci_clear_gravity_form_session( $transaction_object ) {
 add_filter( 'it_exchange_transaction_object', 'ibd_gfci_clear_gravity_form_session' );
 
 /**
+ * When the shopping cart is emptied, clear the session.
+ *
+ * @since 1.6
+ */
+function ibd_gfci_clear_session_on_empty_cart() {
+	it_exchange_clear_session_data( 'ibd_gfci_checkout_forms' );
+}
+
+add_action( 'it_exchange_empty_shopping_cart', 'ibd_gfci_clear_session_on_empty_cart' );
+
+/**
+ * When a product is removed from the cart, clear the session for that product.
+ *
+ * @since 1.6
+ *
+ * @param string $cart_product_id
+ */
+function ibd_gfci_clear_session_on_product_removed( $cart_product_id ) {
+
+	$forms = it_exchange_get_session_data( 'ibd_gfci_checkout_forms' );
+
+	unset( $forms[ (int) $cart_product_id ] );
+
+	it_exchange_update_session_data( 'ibd_gfci_checkout_forms', $forms );
+}
+
+add_action( 'it_exchange_delete_cart_product', 'ibd_gfci_clear_session_on_product_removed' );
+
+/**
  * Display the gravity forms submission data in the transaction admin panel
  *
  * @param WP_Post $post
