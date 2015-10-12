@@ -13,7 +13,7 @@ class LDMW_Conference_Exchange_Feature extends IT_Exchange_Product_Feature_Abstr
 	 * @param array $args
 	 */
 	function __construct( $args = array() ) {
-		parent::IT_Exchange_Product_Feature_Abstract( $args );
+		parent::__construct( $args );
 	}
 
 	/**
