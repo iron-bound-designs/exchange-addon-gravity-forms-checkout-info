@@ -3,8 +3,8 @@ Contributors: TimothyBlynJacobs
 Donate link: http://ironbounddesigns.com/
 Tags: iThemes Exchange, addon, ecommerce, gravity forms, checkout
 Requires at least: 3.9
-Tested up to: 4.1
-Stable tag: 1.5
+Tested up to: 4.3.1
+Stable tag: 1.6
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -25,6 +25,10 @@ Requires iThemes Exchange and Gravity Forms.
 4. Activate the plugin through the 'Plugins' menu in WordPress Administration.
 
 == Changelog ==
+
+= 1.6 =
+* FIX: Clear session after the cart is emptied, or a product is removed
+* FIX: Use correct parent constructor call.
 
 = 1.5 =
 * ADD: Allow for appending the form values to admin confirmation emails
