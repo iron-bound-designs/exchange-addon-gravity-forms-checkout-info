@@ -1,11 +1,11 @@
 <?php
 /*
-Plugin Name: iThemes Exchange – Gravity Forms Checkout Info Add-on
-Plugin URI: http://www.ironbounddesigns.com
+Plugin Name: ExchangeWP – Gravity Forms Checkout Info Add-on
+Plugin URI: https://exchangewp.com
 Description: Add a Gravity Form for customers to fill out during the checkout process
 Version: 1.6
-Author: Iron Bound Designs
-Author URI: http://www.ironbounddesigns.com
+Author: ExchangeWP
+Author URI: https://exchangewp.com
 License: GPL2
 Domain: ibd_gravity_forms_checkout_info
 */
@@ -21,8 +21,8 @@ function it_exchange_register_gravity_forms_checkout_form() {
 	$options = array(
 	  'name'                => __( 'Gravity Forms Checkout Info', 'ibd_gravity_forms_checkout_info' ),
 	  'description'         => __( 'Harness the full power of Gravity Forms during your checkout process.', 'ibd_gravity_forms_checkout_info' ),
-	  'author'              => 'Iron Bound Designs',
-	  'author_url'          => 'http://www.ironbounddesigns.com',
+	  'author'              => 'ExchangeWP',
+	  'author_url'          => 'https://exchangewp.com',
 	  'file'                => dirname( __FILE__ ) . '/init.php',
 	  'icon'                => IBD_GFCI_Plugin::$url . '/assets/icon-50x50.png',
 	  'category'            => 'product-feature',
