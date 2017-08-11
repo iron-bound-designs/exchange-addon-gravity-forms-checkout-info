@@ -135,7 +135,10 @@ class IBD_GFCI_Settings {
 			<h4>License Key</h4>
 			<?php
 			   $exchangewp_gravityforms_options = get_option( 'it-storage-exchange_addon_ibd_gfci' );
-			   $license = $exchangewp_gravityforms_options['gravityforms_license'];
+				 if ( !empty($exchangewp_gravity_forms_options ) ) {
+					 	$license = $exchangewp_gravityforms_options['gravityforms_license'];
+				 }
+
 			   // var_dump($license);
 			   $exstatus = trim( get_option( 'exchange_gravityforms_license_status' ) );
 			   // var_dump($exstatus);
