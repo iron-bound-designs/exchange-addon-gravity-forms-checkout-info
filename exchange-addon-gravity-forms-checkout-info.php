@@ -1,6 +1,6 @@
 <?php
 /*
-Plugin Name: ExchangeWP – Gravity Forms Checkout Info Add-on
+Plugin Name: ExchangeWP – Gravity Forms Checkout Pro Add-on
 Plugin URI: https://exchangewp.com/downloads/gravity-forms-pro/
 Description: Add a Gravity Form for customers to fill out during the checkout process
 Version: 1.6.1
@@ -77,23 +77,19 @@ if ( ! class_exists( 'EDD_SL_Plugin_Updater' ) )  {
  	// this is going to have to be pulled from a seralized array to get the actual key.
  	// $license_key = trim( get_option( 'exchange_gravityforms_license_key' ) );
  	$exchangewp_gravityforms_options = get_option( 'it-storage-exchange_addon_ibd_gfci' );
-	if ( !empty($exchangewp_gravity_forms_options ) ) {
-		 $license_key = $exchangewp_gravityforms_options['gravityforms_license'];
+	$license_key = $exchangewp_gravityforms_options['gravityforms_license'];
 
-		 // setup the updater
-	  	$edd_updater = new EDD_SL_Plugin_Updater( 'https://exchangewp.com', __FILE__, array(
-	  			'version' 		=> '1.6.1', 				// current version number
-	  			'license' 		=> $license_key, 		// license key (used get_option above to retrieve from DB)
-	  			'item_name' 	=> 'gravity-forms-pro', 	  // name of this plugin
-	  			'author' 	  	=> 'ExchangeWP',    // author of this plugin
-	  			'url'       	=> home_url(),
-	  			'wp_override' => true,
-	  			'beta'		  	=> false
-	  		)
-	  	);
-	}
-
-
+	// setup the updater
+	$edd_updater = new EDD_SL_Plugin_Updater( 'https://exchangewp.com', __FILE__, array(
+			'version' 		=> '1.6.1', 				// current version number
+			'license' 		=> $license_key, 		// license key (used get_option above to retrieve from DB)
+			'item_name' 	=> 'gravity-forms-pro', 	  // name of this plugin
+			'author' 	  	=> 'ExchangeWP',    // author of this plugin
+			'url'       	=> home_url(),
+			'wp_override' => true,
+			'beta'		  	=> false
+		)
+	);
 
  	// var_dump($edd_updater);
  	// die();

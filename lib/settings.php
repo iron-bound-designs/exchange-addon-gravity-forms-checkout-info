@@ -278,17 +278,12 @@ class IBD_GFCI_Settings {
 
 			// Check if anything passed on a message constituting a failure
 			if ( ! empty( $message ) ) {
-				$base_url = admin_url( 'admin.php?page=' . 'gravityforms-license' );
-				$redirect = add_query_arg( array( 'sl_activation' => 'false', 'message' => urlencode( $message ) ), $base_url );
-
-				wp_redirect( $redirect );
-				exit();
+				return;
 			}
 
 			//$license_data->license will be either "valid" or "invalid"
 			update_option( 'exchange_gravityforms_license_status', $license_data->license );
-			// wp_redirect( admin_url( 'admin.php?page=' . 'gravityforms-license' ) );
-			exit();
+			return;
 		}
 
 	 // deactivate here
@@ -325,11 +320,7 @@ class IBD_GFCI_Settings {
 					$message = __( 'An error occurred, please try again.' );
 				}
 
-				// $base_url = admin_url( 'admin.php?page=' . 'gravityforms-license' );
-				// $redirect = add_query_arg( array( 'sl_activation' => 'false', 'message' => urlencode( $message ) ), $base_url );
-
-				wp_redirect( 'admin.php?page=gravityforms-license' );
-				exit();
+				return;
 			}
 
 			// decode the license data
@@ -339,8 +330,7 @@ class IBD_GFCI_Settings {
 				delete_option( 'exchange_gravityforms_license_status' );
 			}
 
-			// wp_redirect( admin_url( 'admin.php?page=' . 'gravityforms-license' ) );
-			exit();
+			return;
 
 		}
 
