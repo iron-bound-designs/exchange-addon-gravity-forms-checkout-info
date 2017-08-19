@@ -1,10 +1,10 @@
 === Gravity Forms Checkout Info: IT Exchange ===
-Contributors: TimothyBlynJacobs
-Donate link: http://ironbounddesigns.com/
-Tags: iThemes Exchange, addon, ecommerce, gravity forms, checkout
+Contributors: ajmorris
+Donate link: https://exchangewp.com/
+Tags: ExchangeWP, addon, ecommerce, gravity forms, checkout
 Requires at least: 3.9
-Tested up to: 4.3.1
-Stable tag: 1.6
+Tested up to: 4.8.1
+Stable tag: 1.6.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -14,7 +14,7 @@ Harness the full power of Gravity Forms during your checkout process.
 
 This plugin allows you to create a Gravity Form for your customers to fill out during the checkout process. Can be controlled on a per-product basis.
 
-Requires iThemes Exchange and Gravity Forms.
+Requires ExchangeWP and Gravity Forms.
 
 
 == Installation ==
@@ -25,6 +25,10 @@ Requires iThemes Exchange and Gravity Forms.
 4. Activate the plugin through the 'Plugins' menu in WordPress Administration.
 
 == Changelog ==
+
+= 1.6.1 =
+* ENHANCEMENT: ExchangeWP Rebrand
+* ENHANCEMENT: New ExchangeWP License and Software Update system
 
 = 1.6 =
 * FIX: Clear session after the cart is emptied, or a product is removed
